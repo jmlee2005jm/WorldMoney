@@ -1,24 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="text"/>
-
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="#C5C5C5">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:background="#9fbd75">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="30dp"
+            android:text="시작 금액:   "
+            android:textColor="#000000"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/initialMoneyTV"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="0원"
+            android:textSize="30dp"
+            android:textColor="#000000"
+            android:gravity="center"/>
+    </LinearLayout>
+    <LinearLayout
+        android:paddingTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:orientation="horizontal">
+        <ListView
+            android:id="@+id/moneyListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
     <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
+        android:id="@+id/testBtn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp" />
+        android:text="확인"/>
 
-</RelativeLayout>
+
+<!--    Slide View -->
+</LinearLayout>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/slideView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/inputMoneyTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="액수:"
+                android:paddingRight="30dp"/>
+
+            <EditText
+                android:id="@+id/inputMoneyET"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
+
+            <Spinner
+                android:id="@+id/inputMoneySpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/inputMoneyType" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/reasonTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="제목:"
+                android:paddingRight="30dp"/>
+
+            <EditText
+                android:id="@+id/titleMoneyET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/descTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="제목:"
+                android:paddingRight="30dp"/>
+
+            <EditText
+                android:id="@+id/descET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <RadioGroup
+            android:id="@+id/moneyChangeSignRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <RadioButton
+                android:id="@+id/incomeRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(+) 수입"
+                android:paddingRight="70dp"/>
+            <RadioButton
+                android:id="@+id/spentRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(-) 지출"/>
+        </RadioGroup>
+        <Button
+            android:id="@+id/confirmBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="확인"/>
+    </LinearLayout>
+</LinearLayout>
