@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="bottom">
     <LinearLayout
         android:id="@+id/slideView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/rounded_up_corners_bg">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -17,7 +19,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="액수:"
-                android:paddingRight="30dp"/>
+                android:paddingRight="30dp"
+                android:textColor="#000000"/>
 
             <EditText
                 android:id="@+id/inputMoneyET"
@@ -29,18 +32,22 @@
                 android:id="@+id/inputMoneySpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/inputMoneyType" />
+                android:entries="@array/inputMoneyType"
+                android:background="#DDDDDD"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp">
             <TextView
                 android:id="@+id/reasonTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="제목:"
-                android:paddingRight="30dp"/>
+                android:paddingRight="30dp"
+                android:textColor="#000000"/>
 
             <EditText
                 android:id="@+id/titleMoneyET"
@@ -50,13 +57,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp">
             <TextView
                 android:id="@+id/descTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="제목:"
-                android:paddingRight="30dp"/>
+                android:text="내용:"
+                android:paddingRight="30dp"
+                android:textColor="#000000"/>
 
             <EditText
                 android:id="@+id/descET"
@@ -85,6 +95,8 @@
             android:id="@+id/confirmBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="확인"/>
+            android:text="확인"
+            android:textSize="18dp"
+            android:background="#28BAA9"/>
     </LinearLayout>
 </LinearLayout>

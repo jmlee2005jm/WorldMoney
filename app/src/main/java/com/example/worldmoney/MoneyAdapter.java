@@ -77,11 +77,12 @@ public class MoneyAdapter extends BaseAdapter {
 
         if(item != null){
             holder.amountTV.setText(item.getAmount());
-            holder.titleTV.setText(item.getTitle());
-            holder.leftMoneyTV.setText(String.valueOf(item.getLeftMoney()));
+            holder.titleTV.setText(item.getTitle()+"원");
+            holder.leftMoneyTV.setText(String.valueOf(item.getLeftMoney())+"원");
             holder.itemiconIV.setImageResource(item.getImageRes());
             holder.descTV.setText(item.getDesc());
             holder.moneySignLayout.setBackgroundColor(item.getMoneySignColor());
+            holder.moneySignLayout.invalidate();
         }
 
         return convertView;

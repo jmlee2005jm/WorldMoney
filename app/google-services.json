@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "525903269539",
+    "firebase_url": "https://worldmoney-3e99e-default-rtdb.firebaseio.com",
+    "project_id": "worldmoney-3e99e",
+    "storage_bucket": "worldmoney-3e99e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525903269539:android:9fcdf2ce0bbac9b0423916",
+        "android_client_info": {
+          "package_name": "com.example.worldmoney"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525903269539-7hdg05u0eqjt5jscl4e66j13utb311q5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgjGiml5mqucyr50Xsv9HUGHXmYfYgJew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525903269539-7hdg05u0eqjt5jscl4e66j13utb311q5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

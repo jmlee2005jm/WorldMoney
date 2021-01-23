@@ -4,6 +4,15 @@ public class IncomeItem {
     String amount,title,desc;
     long leftMoney;
     int ImageRes,moneySignColor;
+    Boolean isPositive;
+
+    public Boolean getPositive() {
+        return isPositive;
+    }
+
+    public void setPositive(Boolean positive) {
+        isPositive = positive;
+    }
 
     public int getMoneySignColor() {
         return moneySignColor;

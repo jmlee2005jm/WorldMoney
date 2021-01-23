@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="10dp"
+    android:fitsSystemWindows="true"
     android:background="#C5C5C5">
+    <RelativeLayout
+        android:id="@+id/rootView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
+        android:id="@+id/initMoneyLayout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -23,27 +29,46 @@
             android:id="@+id/initialMoneyTV"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="0원"
+            android:text="100000원"
             android:textSize="30dp"
             android:textColor="#000000"
             android:gravity="center"/>
     </LinearLayout>
+
     <LinearLayout
-        android:paddingTop="20dp"
+        android:id="@+id/listViewLayout"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@id/initMoneyLayout">
         <ListView
             android:id="@+id/moneyListView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:padding="15dp"/>
     </LinearLayout>
-    <Button
-        android:id="@+id/testBtn"
+        <FrameLayout
+            android:alpha="0"
+            android:id="@+id/dim"
+            android:fitsSystemWindows="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#9F000000" />
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="확인"/>
-
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        app:srcCompat="@drawable/ic_plus"/>
 
 <!--    Slide View -->
-</LinearLayout>
+    <include layout="@layout/money_add_slideup_view"
+        tools:visibility = "gone"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </RelativeLayout>
+</RelativeLayout>
