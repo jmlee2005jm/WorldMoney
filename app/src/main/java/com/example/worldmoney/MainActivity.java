@@ -26,6 +26,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.mancj.slideup.SlideUp;
 import com.mancj.slideup.SlideUpBuilder;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
@@ -43,24 +47,23 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivityTAG_";
-    private static final String API_URL = "https://api.manana.kr/exchange/price/KRW/1/KRW,USD,JPY.json";
+    private static String API_URL = "https://api.manana.kr/exchange/price/KRW/1/KRW,USD.json";
     private OkHttpClient client = new OkHttpClient();
 
     private Button confirmBtn;
     private FloatingActionButton fab;
-    private Spinner spinner;
-    private EditText inputMoneyET,titleET,descET;
+    private Spinner currencySpinner,moneyUsageSpinner;
+    private EditText inputMoneyET,descET;
     private RadioButton incomeRadBtn, spentRadBtn;
     private ListView moneyListView;
     private MoneyAdapter adapter;
     private View slideView;
-    private TextView initMoneyView;
     private FrameLayout dim;
 
     private ArrayList<IncomeItem> moneyItems = new ArrayList<>();
     private IncomeItem tempIncomeItem;
 
-    private String currency;
+    private String currency,moneyUsage,moneyUsageDrawableID;
 
     private SlideUp slideUp;
 
@@ -75,15 +78,14 @@ public class MainActivity extends AppCompatActivity {
         dim = (FrameLayout)findViewById(R.id.dim);
 
         slideView = (View)findViewById(R.id.slideView);
-        initMoneyView = (TextView)findViewById(R.id.initialMoneyTV);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         confirmBtn = (Button)findViewById(R.id.confirmBtn);
 
-        spinner = (Spinner)findViewById(R.id.inputMoneySpinner);
+        currencySpinner = (Spinner)findViewById(R.id.inputMoneySpinner);
+        moneyUsageSpinner = (Spinner)findViewById(R.id.moneyTypeSpinner);
 
         inputMoneyET = (EditText)findViewById(R.id.inputMoneyET);
-        titleET = (EditText)findViewById(R.id.titleMoneyET);
         descET = (EditText)findViewById(R.id.descET);
 
         incomeRadBtn = (RadioButton)findViewById(R.id.incomeRadioButton);
@@ -161,10 +163,47 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        currencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 currency = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        moneyUsageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                moneyUsage = parent.getItemAtPosition(position).toString();
+                switch (moneyUsage){
+                    case "식비":
+                        moneyUsageDrawableID = "fork";
+                        break;
+                    case "교통비":
+                        moneyUsageDrawableID = "ecocar";
+                        break;
+                    case "쇼핑":
+                        moneyUsageDrawableID = "shoppingcart";
+                        break;
+                    case "관광":
+                        moneyUsageDrawableID = "car";
+                        break;
+                    case "숙박비":
+                        moneyUsageDrawableID = "bed";
+                        break;
+                    case "항공비":
+                        moneyUsageDrawableID = "airplane";
+                        break;
+                    case "기타":
+                        moneyUsageDrawableID = "more";
+                        break;
+                    default:
+                        break;
+                }
             }
 
             @Override
@@ -187,19 +226,16 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                         return;
                     }
-                item.setTitle(titleET.getText().toString());
                 item.setDesc(descET.getText().toString());
+                int id = getResources().getIdentifier(moneyUsageDrawableID,"drawable",getPackageName());
+                item.setImageRes(id);
                 if (incomeRadBtn.isChecked()){
                     item.setAmount("+"+money);
                     leftMoney += money;
-                    item.setLeftMoney(leftMoney);
-                    item.setMoneySignColor(0xe0ebc3);
                     item.setPositive(Boolean.TRUE);
                 } else if (spentRadBtn.isChecked()){
                     item.setAmount("-"+money);
                     leftMoney -= money;
-                    item.setLeftMoney(leftMoney);
-                    item.setMoneySignColor(0xf3bfbf);
                     item.setPositive(Boolean.FALSE);
                 } else {
                     Toast.makeText(MainActivity.this, "NOT SELECTED", Toast.LENGTH_SHORT).show();
@@ -217,9 +253,12 @@ public class MainActivity extends AppCompatActivity {
                 countRef.setValue(c);
             }
         });
+    }
 
-
-
+    private static String json;
+    private double changeCur(String init,double initMoney,String fin){
+        double finMoney = 0;
+        API_URL ="https://api.manana.kr/exchange/price/"+init+"/"+initMoney+"/"+fin+".json";
         createObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -231,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(String value) {
-                        Log.d(TAG, "onNext: " + value);
+                        json = value;
                     }
 
                     @Override
@@ -244,6 +283,13 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, "onComplete: ");
                     }
                 });
+        try{
+            JSONObject jsonObject = new JSONObject(json);
+            finMoney = jsonObject.getDouble(fin);
+        } catch(JSONException e){
+            e.printStackTrace();
+        }
+        return finMoney;
     }
 
     private String run(String url) throws IOException {

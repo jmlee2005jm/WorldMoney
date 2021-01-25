@@ -8,8 +8,7 @@
         android:id="@+id/slideView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#FFFFFF">
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="10dp"
@@ -31,7 +30,7 @@
 
             <EditText
                 android:id="@+id/inputMoneyET"
-                android:layout_width="126dp"
+                android:layout_width="147dp"
                 android:layout_height="wrap_content"
                 android:inputType="number"/>
 

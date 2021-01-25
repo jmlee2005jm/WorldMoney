@@ -15,19 +15,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"/>
-        <LinearLayout
-            android:id="@+id/listViewLayout"
+    <LinearLayout
+        android:id="@+id/listViewLayout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        android:layout_above="@id/sumMoneyLayout"
+        android:scrollbars="none">
+        <ListView
+            android:id="@+id/moneyListView"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:orientation="vertical"
-            android:layout_above="@id/sumMoneyLayout"
-            android:scrollbars="none">
-            <ListView
-                android:id="@+id/moneyListView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="15dp"/>
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:padding="15dp"/>
+    </LinearLayout>
         <LinearLayout
             android:id="@+id/sumMoneyLayout"
             android:layout_width="match_parent"
@@ -130,20 +130,20 @@
             android:layout_height="match_parent"
             android:background="#9F000000" />
         <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_margin="16dp"
-                app:srcCompat="@drawable/ic_plus" />
-            <include
-                layout="@layout/money_add_slideup_view"
-                tools:visibility="gone" />
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_margin="16dp"
+                    app:srcCompat="@drawable/ic_plus" />
+                <include
+                    layout="@layout/money_add_slideup_view"
+                    tools:visibility="gone" />
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </RelativeLayout>
 </RelativeLayout>
