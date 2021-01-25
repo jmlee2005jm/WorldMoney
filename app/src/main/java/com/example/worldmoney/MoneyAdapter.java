@@ -1,22 +1,28 @@
 package com.example.worldmoney;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MoneyAdapter extends BaseAdapter {
+
+    private static final String TAG = "MoneyAdapterTAG_";
+
     ArrayList<IncomeItem> mItems;
     Context mContext;
     LayoutInflater inflater;
+
+    String curSymbol = "$";
 
     public MoneyAdapter(Context context, ArrayList<IncomeItem> items){
         this.mItems = new ArrayList<>();
@@ -50,7 +56,7 @@ public class MoneyAdapter extends BaseAdapter {
     }
 
     class Holder{
-        TextView amountTV, descTV;
+        TextView amountTV, descTV, cardCashTV;
         ImageView itemIconIV;
     }
 
@@ -65,6 +71,7 @@ public class MoneyAdapter extends BaseAdapter {
             holder.amountTV = convertView.findViewById(R.id.amountTV);
             holder.descTV = convertView.findViewById(R.id.descTV);
             holder.itemIconIV = convertView.findViewById(R.id.itemIconIV);
+            holder.cardCashTV = convertView.findViewById(R.id.cardCashView);
             convertView.setTag(holder);
         } else {
             holder = (Holder)convertView.getTag();
@@ -73,7 +80,26 @@ public class MoneyAdapter extends BaseAdapter {
         IncomeItem item = mItems.get(position);
 
         if(item != null){
-            holder.amountTV.setText(item.getAmount()+"원");
+            if(item.getCur() != null){
+                switch (item.getCur()){
+                    case "USD":
+                    case "SGD":
+                    case "AUD":
+                        curSymbol = "$";
+                        break;
+                    case "KRW":
+                        curSymbol = "₩";
+                        break;
+                    case "JPY":
+                    case "CNY":
+                        curSymbol = "¥";
+                        break;
+                    default:
+                        break;
+                }
+            }
+            double a = item.getMoney();
+            holder.amountTV.setText(curSymbol+ String.format("%.2f",a));
             holder.itemIconIV.setImageResource(item.getImageRes());
             holder.descTV.setText(item.getDesc());
             if(item.getPositive()) {
@@ -81,8 +107,12 @@ public class MoneyAdapter extends BaseAdapter {
             } else {
                 holder.amountTV.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.colorSpentMoney));
             }
+            if(item.getCash()) {
+                holder.cardCashTV.setText("현금");
+            } else {
+                holder.cardCashTV.setText("카드");
+            }
         }
-
         return convertView;
     }
 }
